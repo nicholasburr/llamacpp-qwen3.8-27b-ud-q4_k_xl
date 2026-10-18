@@ -1,15 +1,15 @@
 [Unit]
-Description=qwen3.8-27b server (ROCm 10.1.0)
+Description=qwen3.8-27b-ud-q4_k_xl server (ROCm 10.1.0)
 # Requires= pulls the build service in when this service is started (boot,
 # login, or manual); After= orders the container start to happen only AFTER
 # the build has FINISHED (the build unit is Type=oneshot, so "active" means
 # the image exists). Without this the container starts before the image is
 # built and fails with "image not found" (pulling from registry "localhost").
-Requires=qwen3.8-27b-build.service
-After=network-online.target qwen3.8-27b-build.service
+Requires=qwen3.8-27b-ud-q4_k_xl-build.service
+After=network-online.target qwen3.8-27b-ud-q4_k_xl-build.service
 
 [Container]
-ContainerName=qwen3.8-27b
+ContainerName=qwen3.8-27b-ud-q4_k_xl
 Image=localhost/llamacpp:f44-rocm10.1.0-v0.7.0
 PublishPort=8000:8000
 AddDevice=/dev/dri
@@ -23,7 +23,7 @@ Volume=/home/nburr/.cache/huggingface/hub/:/root/.cache/huggingface/hub/:Z
 Volume=/home/nburr/.config/llama.cpp/:/root/.config/llama.cpp/:Z
 # Model
 Environment=LLAMA_ARG_HF_REPO=unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL
-Environment=LLAMA_ARG_ALIAS=qwen3.8-27b
+Environment=LLAMA_ARG_ALIAS=qwen3.8-27b-ud-q4_k_xl
 # Server
 Environment=LLAMA_ARG_LOG_TIMESTAMPS=on
 Environment=LLAMA_ARG_HOST=0.0.0.0

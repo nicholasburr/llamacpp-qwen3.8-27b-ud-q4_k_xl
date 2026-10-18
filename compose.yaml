@@ -1,4 +1,4 @@
-# Podman Compose deployment of qwen3.8-27b (ROCm, Strix Halo).
+# Podman Compose deployment of qwen3.8-27b-ud-q4_k_xl (ROCm, Strix Halo).
 #
 # One of the file-based deployment methods — the Makefile (`make deploy`),
 # this file, and the quadlet units all define the identical container
@@ -8,16 +8,16 @@
 #
 #   podman compose up -d              # start (recreates if changed)
 #   podman compose down               # stop & remove
-#   podman compose logs -f qwen3.8-27b
+#   podman compose logs -f qwen3.8-27b-ud-q4_k_xl
 
 secrets:
   huggingface-token:
     external: true
 
 services:
-  qwen3.8-27b:
+  qwen3.8-27b-ud-q4_k_xl:
     image: ${IMAGE:-localhost/llamacpp:f44-rocm10.1.0-v0.7.0}
-    container_name: ${CONTAINER_NAME:-qwen3.8-27b}
+    container_name: ${CONTAINER_NAME:-qwen3.8-27b-ud-q4_k_xl}
     # Custom code to enable ipc: host in podman-compose. See the family notes.
     ipc: host
     restart: unless-stopped
@@ -41,7 +41,7 @@ services:
     environment:
       # Model
       LLAMA_ARG_HF_REPO: "unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL"
-      LLAMA_ARG_ALIAS: "qwen3.8-27b"
+      LLAMA_ARG_ALIAS: "qwen3.8-27b-ud-q4_k_xl"
       # Server
       LLAMA_ARG_LOG_TIMESTAMPS: "on"
       LLAMA_ARG_HOST: "0.0.0.0"

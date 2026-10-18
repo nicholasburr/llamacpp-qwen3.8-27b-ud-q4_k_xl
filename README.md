@@ -1,12 +1,12 @@
-# llamacpp-qwen3.8-27b
+# llamacpp-qwen3.8-27b-ud-q4_k_xl
 
-Podman deployment of **unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL** (served as `qwen3.8-27b`) on
+Podman deployment of **unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL** (served as `qwen3.8-27b-ud-q4_k_xl`) on
 [llama.cpp](https://github.com/ggml-org/llama.cpp) with **ROCm 10.1.0**
 on Strix Halo (AMD Ryzen AI Max+ 395, 32GB UMA), built on Fedora 44.
 
 This project was bootstrapped from the **shared** git submodule
 (`shared/`) with `bash shared/init.sh MODEL=unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL`. Everything model-specific
-(`TAGS`, `compose.yaml`, `config/containers/systemd/qwen3.8-27b/*`, this
+(`TAGS`, `compose.yaml`, `config/containers/systemd/qwen3.8-27b-ud-q4_k_xl/*`, this
 README) is templated in place; the shared build machinery (`Makefile`,
 `Containerfile`) is symlinked from the submodule.
 
@@ -23,14 +23,14 @@ make stop        # stop the service
 ```
 
 The default deployment is **quadlet** (user systemd, no root): `make deploy`
-installs the units from `config/containers/systemd/qwen3.8-27b/` and
-starts `qwen3.8-27b.service`. A **podman compose** deployment
+installs the units from `config/containers/systemd/qwen3.8-27b-ud-q4_k_xl/` and
+starts `qwen3.8-27b-ud-q4_k_xl.service`. A **podman compose** deployment
 (`compose.yaml`) is an operator alternative that defines the identical
 container — run exactly one method at a time:
 
 | Method | Files | Start |
 |---|---|---|
-| quadlet (**default**) | `config/containers/systemd/qwen3.8-27b/*.container`, `*.build` | `make deploy` |
+| quadlet (**default**) | `config/containers/systemd/qwen3.8-27b-ud-q4_k_xl/*.container`, `*.build` | `make deploy` |
 | podman compose | `compose.yaml` | `podman compose up -d` |
 
 Both stay in lockstep with `TAGS` via `make sync`.
@@ -72,7 +72,7 @@ one-time input and never changes (a project serves exactly one model).
 ## Runtime environment
 
 The container runs `llama-server` with the runtime/feature environment
-variables defined in `compose.yaml` and the quadlet `qwen3.8-27b.container`
+variables defined in `compose.yaml` and the quadlet `qwen3.8-27b-ud-q4_k_xl.container`
 unit (kept in sync by `make sync`): 8 CPU threads, 262144 ctx, flash attention,
 q8_0 KV cache, `draft-mtp` speculative decoding, and the Web UI / agent / tools /
 reasoning feature flags. The model is pulled at runtime from `unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL` via the

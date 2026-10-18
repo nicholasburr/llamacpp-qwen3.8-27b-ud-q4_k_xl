@@ -1,13 +1,13 @@
 [Unit]
-Description=Build the shared llama.cpp ROCm image (for qwen3.8-27b)
-Documentation=https://github.com/nicholasburr/llamacpp-qwen3.8-27b
+Description=Build the shared llama.cpp ROCm image (for qwen3.8-27b-ud-q4_k_xl)
+Documentation=https://github.com/nicholasburr/llamacpp-qwen3.8-27b-ud-q4_k_xl
 After=network-online.target
 Wants=network-online.target
 
 [Build]
 ImageTag=localhost/llamacpp:f44-rocm10.1.0-v0.7.0
 File=Containerfile
-SetWorkingDirectory=/home/nburr/Desktop/llamacpp-qwen3.8-27b
+SetWorkingDirectory=/home/nburr/Desktop/llamacpp-qwen3.8-27b-ud-q4_k_xl
 ForceRM=true
 BuildArg=FEDORA_VERSION=44
 BuildArg=ROCM_VERSION=10.1.0
