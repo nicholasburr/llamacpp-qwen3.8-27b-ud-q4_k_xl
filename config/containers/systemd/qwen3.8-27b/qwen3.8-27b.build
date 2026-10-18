@@ -5,13 +5,13 @@ After=network-online.target
 Wants=network-online.target
 
 [Build]
-ImageTag=localhost/llamacpp:f44-rocm10.1.0-v0.6.0
+ImageTag=localhost/llamacpp:f44-rocm10.1.0-v0.7.0
 File=Containerfile
 SetWorkingDirectory=/home/nburr/Desktop/llamacpp-qwen3.8-27b
 ForceRM=true
 BuildArg=FEDORA_VERSION=44
 BuildArg=ROCM_VERSION=10.1.0
-BuildArg=TAG=v0.6.0
+BuildArg=TAG=v0.7.0
 
 [Service]
 # Type=oneshot: the unit only reaches "active" AFTER `podman build` FINISHES.

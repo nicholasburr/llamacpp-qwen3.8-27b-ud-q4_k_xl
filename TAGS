@@ -10,6 +10,6 @@
 # the PROJECT file, not here.
 
 IMAGE_NAME=localhost/llamacpp
-LLAMA_TAG=v0.6.0
+LLAMA_TAG=v0.7.0
 ROCM_VERSION=10.1.0
 FEDORA_VERSION=44

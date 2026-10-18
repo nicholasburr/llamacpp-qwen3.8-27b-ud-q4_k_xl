@@ -10,7 +10,7 @@ After=network-online.target qwen3.8-27b-build.service
 
 [Container]
 ContainerName=qwen3.8-27b
-Image=localhost/llamacpp:f44-rocm10.1.0-v0.6.0
+Image=localhost/llamacpp:f44-rocm10.1.0-v0.7.0
 PublishPort=8000:8000
 AddDevice=/dev/dri
 AddDevice=/dev/kfd
