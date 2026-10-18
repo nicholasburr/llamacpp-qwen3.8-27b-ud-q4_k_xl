@@ -1,0 +1,5 @@
+.git
+shared
+*.tpl
+*.bak
+*.bak-*

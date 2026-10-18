@@ -1,0 +1,27 @@
+[Unit]
+Description=Build the shared llama.cpp ROCm image (for qwen3.8-27b)
+Documentation=https://github.com/nicholasburr/llamacpp-qwen3.8-27b
+After=network-online.target
+Wants=network-online.target
+
+[Build]
+ImageTag=localhost/llamacpp:f44-rocm10.1.0-v0.6.0
+File=Containerfile
+SetWorkingDirectory=/home/nburr/Desktop/llamacpp-qwen3.8-27b
+ForceRM=true
+BuildArg=FEDORA_VERSION=44
+BuildArg=ROCM_VERSION=10.1.0
+BuildArg=TAG=v0.6.0
+
+[Service]
+# Type=oneshot: the unit only reaches "active" AFTER `podman build` FINISHES.
+# With Type=simple it would be active as soon as the build starts, and the
+# container unit — ordered after this one — would race the build and fail
+# with "image not found". RemainAfterExit=yes keeps a success sticky so
+# container restarts do not re-trigger a (cached) build; `make deploy`
+# re-runs this unit explicitly when the image is missing (e.g. after clean).
+Type=oneshot
+RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target
